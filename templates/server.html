@@ -1,0 +1,100 @@
+<!-- server.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #3498db;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        strong {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .blockchain-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .block {
+            background-color: #ecf0f1;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .block:hover {
+            background-color: #d6eaf8;
+        }
+
+        .toggle-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .toggle-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <script>
+        function toggleBlockchain() {
+            var blockchainContainer = document.getElementById('blockchain-container');
+            blockchainContainer.style.display = (blockchainContainer.style.display === 'none' || blockchainContainer.style.display === '') ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Server</h1>
+        <div>
+            <h2 class="mt-4">Current Voting Results</h2>
+            <ul>
+                {% for color, count in voting_results.items() %}
+                    <li>{{ color }}: {{ count }} votes</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="blockchain-container" class="blockchain-container">
+            <h2 class="mt-4">Blockchain</h2>
+            <div class="block">
+                {% for block in blockchain %}
+                    <div class="block">
+                        <strong>Index:</strong> {{ block.index }}<br>
+                        <strong>Timestamp:</strong> {{ block.timestamp }}<br>
+                        <strong>Data:</strong> {{ block.data }}<br>
+                        <strong>Hash:</strong> {{ block.hash }}<br>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button class="btn toggle-button mt-4" onclick="toggleBlockchain()">Display Blockchain</button>
+    </div>
+</body>
+</html>
